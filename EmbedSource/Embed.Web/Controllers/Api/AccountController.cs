@@ -14,11 +14,11 @@ namespace Embed.Web.Controllers.Api
 {
     public class AccountController : ApiController
     {
-        private AuthRepository _repo = null;
+        private IAuthRepository _repo = null;
 
-        public AccountController()
+        public AccountController(IAuthRepository repo)
         {
-            _repo = new AuthRepository();
+            _repo = repo;
         }
 
         [AllowAnonymous]

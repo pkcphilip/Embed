@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Embed.Persistance.Repositories.Auth
 {
-    public class AuthRepository : IDisposable
+    public class AuthRepository : IAuthRepository
     {
         private ApplicationDbContext _context;
 

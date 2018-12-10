@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Embed.Core.Abstract;
 using Embed.Persistance.Repositories;
+using Embed.Persistance.Repositories.Auth;
 using Embed.Web.Mapping;
 using Embed.Web.Provider;
 using Microsoft.Owin;
@@ -63,6 +64,7 @@ namespace Embed.Web
             kernel.Load(Assembly.GetExecutingAssembly());
             kernel.Bind<IProductRepository>().To<ProductRepository>();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<IAuthRepository>().To<AuthRepository>();
             return kernel;
         }
 
