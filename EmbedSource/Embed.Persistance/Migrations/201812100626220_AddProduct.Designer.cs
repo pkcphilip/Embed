@@ -20,7 +20,7 @@ namespace Embed.Persistance.Migrations
         {
             get { return null; }
         }
-        
+            
         string IMigrationMetadata.Target
         {
             get { return Resources.GetString("Target"); }
