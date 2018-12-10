@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Embed.Core.Entities;
 using Embed.Persistance.Repositories;
-using Embed.Web.Core.Dtos;
+using Embed.Web.Core.Dtos;  
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +25,6 @@ namespace Embed.Web.Controllers.Api
         public IHttpActionResult GetProducts()
         {
             var products = _unitOfWork.Products.GetAllProducts();
-
-            if (products == null)
-                return NotFound();
 
             var responseDto = new ProductResponseBasicDto()
             {
@@ -62,8 +59,6 @@ namespace Embed.Web.Controllers.Api
         [Route("api/products/{ids}")]
         public IHttpActionResult GetProducts([FromUri] string ids)
         {
-            var copy = ids;
-
             if (string.IsNullOrEmpty(ids))
                 return NotFound();
 

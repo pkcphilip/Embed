@@ -36,16 +36,5 @@ namespace Embed.Persistance.Repositories
         {
             return _context.Products.Add(product);
         }
-
-        //public bool VerifyAllProductIdsAreValid(IList<long> productIds)
-        //{
-        //    if (productIds == null || productIds.Count == 0)
-        //        return false;
-
-        //    var existingIds = _context.Products.Select(p => p.Id).ToList();
-
-        //    return productIds.Any(i => !existingIds.Contains(i));
-        //}
-
     }
 }

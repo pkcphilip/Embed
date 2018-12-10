@@ -187,21 +187,5 @@ namespace Embed.UnitTests.Persistance.Repositories
 
             _context.Verify(c => c.Products.Add(product), Times.Once);
         }
-
-
-
-
-        //[TestMethod]
-        //public void Add_TestProduct_ContextAddMethodCalled()
-        //{
-        //    var product = new Product { Id = 1, Name = "Stand Up Arcade Machine", Quantity = 5, SaleAmount = 3200.00 };
-
-        //    _context.Setup(c => c.Products.Add(product));
-        //    _mockProducts.Setup(p => p.Add(It.IsAny<Product>())).Returns(product);
-
-        //    _repository.Add(product);
-
-        //    _context.Verify(c => c.Products.Add(product), Times.Once);
-        //}
     }
 }
