@@ -19,7 +19,7 @@ namespace Embed.Web
             // Code that runs on application startup
             //AreaRegistration.RegisterAllAreas();
             //GlobalConfiguration.Configure(WebApiConfig.Register);
-            //RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
         }
     }
