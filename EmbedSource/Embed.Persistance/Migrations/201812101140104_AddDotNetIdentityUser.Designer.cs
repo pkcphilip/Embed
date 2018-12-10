@@ -7,20 +7,20 @@ namespace Embed.Persistance.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddProduct : IMigrationMetadata
+    public sealed partial class AddDotNetIdentityUser : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddProduct));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddDotNetIdentityUser));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812100626220_AddProduct"; }
+            get { return "201812101140104_AddDotNetIdentityUser"; }
         }
         
         string IMigrationMetadata.Source
         {
             get { return null; }
         }
-            
+        
         string IMigrationMetadata.Target
         {
             get { return Resources.GetString("Target"); }
