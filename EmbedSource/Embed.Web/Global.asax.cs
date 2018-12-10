@@ -7,6 +7,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
+using AutoMapper;
+using Embed.Web.Mapping;
 
 namespace Embed.Web
 {
@@ -17,7 +19,8 @@ namespace Embed.Web
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);            
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            Mapper.Initialize(c => c.AddProfile<MappingProfile>());
         }
     }
 }

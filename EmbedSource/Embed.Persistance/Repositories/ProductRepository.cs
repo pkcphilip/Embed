@@ -14,7 +14,7 @@ namespace Embed.Persistance.Repositories
             _context = context;
         }
 
-        public IEnumerable<Product> GetProducts(IList<long> productIds)
+        public IEnumerable<Product> GetProductsByIds(IList<long> productIds)
         {
             if (productIds == null || productIds.Count == 0)
                 return null;

@@ -12,6 +12,6 @@ namespace Embed.Core.Abstract
 
         Product GetProduct(long productid);
 
-        IEnumerable<Product> GetProducts(IList<long> productIds);
+        IEnumerable<Product> GetProductsByIds(IList<long> productIds);
     }
 }

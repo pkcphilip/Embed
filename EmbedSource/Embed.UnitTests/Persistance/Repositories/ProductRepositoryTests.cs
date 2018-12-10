@@ -122,7 +122,7 @@ namespace Embed.UnitTests.Persistance.Repositories
 
             _mockProducts.SetSource(sourceProducts);
 
-            var products = _repository.GetProducts(new List<long> { 4, 5, 6 });
+            var products = _repository.GetProductsByIds(new List<long> { 4, 5, 6 });
 
             products.Should().HaveCount(3);
             products.Should().BeEquivalentTo(sourceProducts[3], sourceProducts[4], sourceProducts[5]);
@@ -143,7 +143,7 @@ namespace Embed.UnitTests.Persistance.Repositories
 
             _mockProducts.SetSource(sourceProducts);
 
-            var products = _repository.GetProducts(new List<long> ());
+            var products = _repository.GetProductsByIds(new List<long> ());
 
             products.Should().BeNull();
         }
@@ -164,7 +164,7 @@ namespace Embed.UnitTests.Persistance.Repositories
 
             _mockProducts.SetSource(sourceProducts);
 
-            var products = _repository.GetProducts(null);
+            var products = _repository.GetProductsByIds(null);
 
             products.Should().BeNull();
         }
