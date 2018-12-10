@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace Embed.Web.Controllers.Api
 {
+    [Authorize]
     public class ProductsController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
