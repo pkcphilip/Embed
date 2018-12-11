@@ -30,7 +30,9 @@ While working on this assignment, there are some assumptions that I have made:
 1. Pull the Git repo and open it in VS. 
 2. Build the solution.
 3. Open the Package Manager Console (Tools > NuGet Package Manager > Package Manager Console).
-4. In the Package Manager Console window, enter the following command: `Update-Database`.
+4. Set default project as **Embed.Persistance** in the console.
+4. In the Package Manager Console window, enter the following command: `Update-Database -StartupProjectName Embed.Web`.
+5. Right click on **Embed.Web** project and "Set as Startup Project".
 5. Run the application.
 
 ## Instructions
@@ -70,12 +72,12 @@ Content-Type: application/json
 Request body:
 ```
 {
-  "userName": "Taiseer11",
+  "user_name": "Taiseer11",
   "password": "SuperPass",
-  "confirmPassword": "SuperPass"
+  "confirm_password": "SuperPass"
 }
 ```
-
+Return Http Status 200 (OK).
 
 ### Get authentication token
 

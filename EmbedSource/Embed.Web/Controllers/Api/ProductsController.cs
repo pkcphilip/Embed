@@ -133,12 +133,14 @@ namespace Embed.Web.Controllers.Api
                         .Where(p => p.Id != null)
                         .Select(i => i.Id.GetValueOrDefault()).ToList();
 
-            var productsToBeUpdated = _unitOfWork.Products.GetProductsByIds(productDtosWithId);
+            if (productDtosWithId.Count() > 0)
+            {
+                var productsToBeUpdated = _unitOfWork.Products.GetProductsByIds(productDtosWithId);
+                var invalidProductIds = productDtosWithId.Except(productsToBeUpdated.Select(p => p.Id));
 
-            var invalidProductIds = productDtosWithId.Except(productsToBeUpdated.Select(p => p.Id));
-
-            if (invalidProductIds.Count() > 0)
-                return BadRequest($"Product(s) not found for the following invalid product Id(s) in the list: {string.Join(",", invalidProductIds)}.");
+                if (invalidProductIds.Count() > 0)
+                    return BadRequest($"Product(s) not found for the following invalid product Id(s) in the list: {string.Join(",", invalidProductIds)}.");
+            }
 
             var processedProducts = new List<Product>();
 

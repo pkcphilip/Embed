@@ -228,6 +228,25 @@ namespace Embed.UnitTests.Web.Controllers
         }
 
         [TestMethod]
+        public void PutProducts_MultipleValidProductDtosWithoutId_ShouldReturnOk()
+        {
+            var sourceProductDtos = new List<ProductDto>()
+            {
+                new ProductDto { Name = "Card Scanner", Quantity = 150, SaleAmount = 12.00 },
+                new ProductDto { Name = "MotoGP MotorCycle", Quantity = 3, SaleAmount = 1300.00 },
+                new ProductDto { Name = "Street Basketball Arcade Machine", Quantity = 8, SaleAmount = 700.00 },
+            };
+
+            _mockRepository.Setup(r => r.GetProductsByIds(new List<long> { 1, 2, 3 })).Returns((List<Product>) null);
+            _mockRepository.Setup(r => r.GetProduct(1)).Returns(new Product());
+
+            var result = _controller.PutProducts(sourceProductDtos);
+            result.Should().BeOfType<OkNegotiatedContentResult<ProductResponseDto>>();
+
+            _mockUoW.Verify(u => u.Complete());
+        }
+
+        [TestMethod]
         public void PutProducts_EmptyProductDtos_ShouldReturnBadRequest()
         {
             var sourceProductDtos = new List<ProductDto>();
