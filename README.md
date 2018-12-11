@@ -1,7 +1,7 @@
 # Overview
 
 This application aims to provide RESTful API endpoints for user to get, add and update product to the system via GET and PUT API calls. 
-OAuth2 was implemented in the project so only authorized users can perform the API calls. 
+Token based authentication (OAuth) was implemented in the project so only authorized users can perform the API calls. 
 
 
 ## Assumptions
