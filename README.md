@@ -346,4 +346,5 @@ Response body:
 - https://stackoverflow.com/questions/978061/http-get-with-request-body
 - https://www.toptal.com/asp-dot-net/asp-net-web-api-tutorial
 - https://www.pluralsight.com/guides/asp-net-mvc-creating-solutions-with-separate-projects-for-entities-data-access-and-website-functionality
+- https://blog.rapid7.com/2016/12/23/the-value-of-correlation-ids/
 
