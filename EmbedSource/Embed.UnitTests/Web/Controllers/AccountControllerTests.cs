@@ -23,7 +23,7 @@ namespace Embed.UnitTests.Web.Controllers
         {
             _mockRepository = new Mock<IAuthRepository>();
 
-            _controller = new AccountController(_mockRepository.Object) { Configuration = new HttpConfiguration() }; ;
+            _controller = new AccountController(_mockRepository.Object) { Configuration = new HttpConfiguration() };
         }
 
 

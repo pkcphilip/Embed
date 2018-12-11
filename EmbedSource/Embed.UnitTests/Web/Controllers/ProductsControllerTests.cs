@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Http.Results;
 using AutoMapper;
 using Embed.Core.Abstract;
@@ -20,16 +21,17 @@ namespace Embed.UnitTests.Web.Controllers
     {
         private ProductsController _controller;
         private Mock<IProductRepository> _mockRepository;
+        private Mock<IUnitOfWork> _mockUoW;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _mockRepository = new Mock<IProductRepository>();
 
-            var mockUoW = new Mock<IUnitOfWork>();
-            mockUoW.SetupGet(u => u.Products).Returns(_mockRepository.Object);
+            _mockUoW = new Mock<IUnitOfWork>();
+            _mockUoW.SetupGet(u => u.Products).Returns(_mockRepository.Object);
 
-            _controller = new ProductsController(mockUoW.Object);
+            _controller = new ProductsController(_mockUoW.Object) { Configuration = new HttpConfiguration() }; ;
             _controller.Request = new System.Net.Http.HttpRequestMessage();
 
             Mapper.Reset();
@@ -135,6 +137,7 @@ namespace Embed.UnitTests.Web.Controllers
             var result = _controller.PutNewProduct(dto);
 
             result.Should().BeOfType<OkNegotiatedContentResult<ProductResponseDto>>();
+            _mockUoW.Verify(u => u.Complete());
         }
 
         [TestMethod]
@@ -162,6 +165,7 @@ namespace Embed.UnitTests.Web.Controllers
             var result = _controller.PutProduct(1, dto);
 
             result.Should().BeOfType<OkNegotiatedContentResult<ProductResponseDto>>();
+            _mockUoW.Verify(u => u.Complete());
         }
 
         [TestMethod]
@@ -192,9 +196,8 @@ namespace Embed.UnitTests.Web.Controllers
         }
 
         [TestMethod]
-        public void PutProducts_MultipleProductDtos_ShouldReturnOk()
+        public void PutProducts_MultipleValidProductDtos_ShouldReturnOk()
         {
-
             var sourceProductDtos = new List<ProductDto>()
             {
                 new ProductDto { Id = 1, Name = "Stand Up Arcade Machine", Quantity = 5, SaleAmount = 3200.00 },
@@ -205,10 +208,23 @@ namespace Embed.UnitTests.Web.Controllers
                 new ProductDto { Name = "Street Basketball Arcade Machine", Quantity = 8, SaleAmount = 700.00 },
             };
 
+            var sourceProducts = new List<Product>()
+            {
+                new Product { Id = 1, Name = "Stand Up Arcade Machine", Quantity = 5, SaleAmount = 3200.00 },
+                new Product { Id = 2, Name = "Street Fighter 2", Quantity = 50, SaleAmount = 11.25 },
+                new Product { Id = 3, Name = "Pinball Machine", Quantity = 10, SaleAmount = 1500.00 },
+                new Product { Id = 4, Name = "Card Scanner", Quantity = 150, SaleAmount = 12.00 },
+                new Product { Id = 5, Name = "MotoGP MotorCycle", Quantity = 3, SaleAmount = 1300.00 },
+                new Product { Id = 6, Name = "Street Basketball Arcade Machine", Quantity = 8, SaleAmount = 700.00 },
+            };
+
+            _mockRepository.Setup(r => r.GetProductsByIds(new List<long> { 1, 2, 3 })).Returns(sourceProducts);
             _mockRepository.Setup(r => r.GetProduct(1)).Returns(new Product());
 
             var result = _controller.PutProducts(sourceProductDtos);
             result.Should().BeOfType<OkNegotiatedContentResult<ProductResponseDto>>();
+
+            _mockUoW.Verify(u => u.Complete());
         }
 
         [TestMethod]
@@ -218,6 +234,70 @@ namespace Embed.UnitTests.Web.Controllers
 
             var result = _controller.PutProducts(sourceProductDtos);
 
+            result.Should().BeOfType<BadRequestErrorMessageResult>();
+        }
+
+        [TestMethod]
+        public void PutProducts_InvalidProductDtosMissingName_ShouldReturnInvalidModelStateResult()
+        {
+            var sourceProductDtos = new List<ProductDto>()
+            {
+                new ProductDto { Id = 1, Name = null, Quantity = 5, SaleAmount = 3200.00 },
+                new ProductDto { Id = 2, Name = "Street Fighter 2", Quantity = 50, SaleAmount = 11.25 },
+                new ProductDto { Id = 3, Name = "Pinball Machine", Quantity = 10, SaleAmount = 1500.00 }
+            };
+
+            var result = _controller.PutProducts(sourceProductDtos);
+            result.Should().BeOfType<InvalidModelStateResult>();
+        }
+
+        [TestMethod]
+        public void PutProducts_InvalidProductDtosNegativeQuantity_ShouldReturnInvalidModelStateResult()
+        {
+            var sourceProductDtos = new List<ProductDto>()
+            {
+                new ProductDto { Id = 1, Name = "Stand Up Arcade Machine", Quantity = -100, SaleAmount = 3200.00 },
+                new ProductDto { Id = 2, Name = "Street Fighter 2", Quantity = 50, SaleAmount = 11.25 },
+                new ProductDto { Id = 3, Name = "Pinball Machine", Quantity = 10, SaleAmount = 1500.00 },
+            };
+
+            var result = _controller.PutProducts(sourceProductDtos);
+            result.Should().BeOfType<InvalidModelStateResult>();
+        }
+
+        [TestMethod]
+        public void PutProducts_InvalidProductDtosNegativeAmount_ShouldReturnInvalidModelStateResult()
+        {
+            var sourceProductDtos = new List<ProductDto>()
+            {
+                new ProductDto { Id = 1, Name = "Stand Up Arcade Machine", Quantity = 100, SaleAmount = -3200.00 },
+                new ProductDto { Id = 2, Name = "Street Fighter 2", Quantity = 50, SaleAmount = 11.25 },
+                new ProductDto { Id = 3, Name = "Pinball Machine", Quantity = 10, SaleAmount = 1500.00 },
+            };
+
+            var result = _controller.PutProducts(sourceProductDtos);
+            result.Should().BeOfType<InvalidModelStateResult>();
+        }
+
+        [TestMethod]
+        public void PutProducts_InvalidProductDtoIds_ShouldReturnBadRequest()
+        {
+            var sourceProductDtos = new List<ProductDto>()
+            {
+                new ProductDto { Id = 1, Name = "Stand Up Arcade Machine", Quantity = 100, SaleAmount = 3200.00 },
+                new ProductDto { Id = 2, Name = "Street Fighter 2", Quantity = 50, SaleAmount = 11.25 },
+                new ProductDto { Id = 3, Name = "Pinball Machine", Quantity = 10, SaleAmount = 1500.00 },
+            };
+
+            var sourceProducts = new List<Product>()
+            {
+                new Product { Id = 1, Name = "Stand Up Arcade Machine", Quantity = 5, SaleAmount = 3200.00 },
+                new Product { Id = 2, Name = "Street Fighter 2", Quantity = 50, SaleAmount = 11.25 },
+            };
+
+            _mockRepository.Setup(r => r.GetProductsByIds(new List<long> { 1, 2, 3 })).Returns(sourceProducts);
+
+            var result = _controller.PutProducts(sourceProductDtos);
             result.Should().BeOfType<BadRequestErrorMessageResult>();
         }
     }

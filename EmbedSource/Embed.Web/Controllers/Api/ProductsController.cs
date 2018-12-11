@@ -87,6 +87,9 @@ namespace Embed.Web.Controllers.Api
         [Route("api/products/")]
         public IHttpActionResult PutNewProduct([FromBody] ProductDto productDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var newProduct = _unitOfWork.Products.Add(Mapper.Map<ProductDto, Product>(productDto));
 
             _unitOfWork.Complete();
@@ -98,6 +101,9 @@ namespace Embed.Web.Controllers.Api
         [Route("api/products/{id:long}")]
         public IHttpActionResult PutProduct(long id, [FromBody] ProductDto productDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var product = _unitOfWork.Products.GetProduct(id);
 
             if (product == null)
@@ -117,6 +123,23 @@ namespace Embed.Web.Controllers.Api
             if (productDtos == null || !productDtos.Any())
                 return BadRequest("Empty product data in request body.");
 
+            foreach (var dto in productDtos)
+                Validate(dto);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var productDtosWithId = productDtos
+                        .Where(p => p.Id != null)
+                        .Select(i => i.Id.GetValueOrDefault()).ToList();
+
+            var productsToBeUpdated = _unitOfWork.Products.GetProductsByIds(productDtosWithId);
+
+            var invalidProductIds = productDtosWithId.Except(productsToBeUpdated.Select(p => p.Id));
+
+            if (invalidProductIds.Count() > 0)
+                return BadRequest($"Product(s) not found for the following invalid product Id(s) in the list: {string.Join(",", invalidProductIds)}.");
+
             var processedProducts = new List<Product>();
 
             foreach (var productDto in productDtos)
@@ -127,7 +150,7 @@ namespace Embed.Web.Controllers.Api
                     continue;
                 }
 
-                var product = _unitOfWork.Products.GetProduct(productDto.Id.GetValueOrDefault(0));
+                var product = _unitOfWork.Products.GetProduct(productDto.Id.GetValueOrDefault());
 
                 if (product != null)
                 {
