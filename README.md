@@ -19,6 +19,7 @@ While working on this assignment, there are some assumptions that I have made:
 7. Product Id in the request body is an optional field and the rest of the data are mandatory.
 8. Id (Unique Identifier) is based on the request's correlation Id in the response format.
 9. Timestamp is in UTC format.
+10. System to accept JSON body in snake case format.
 
 ## Prerequisites
 
@@ -31,7 +32,11 @@ While working on this assignment, there are some assumptions that I have made:
 2. Build the solution.
 3. Open the Package Manager Console (Tools > NuGet Package Manager > Package Manager Console).
 4. Set default project as **Embed.Persistance** in the console.
-4. In the Package Manager Console window, enter the following command: `Update-Database -StartupProjectName Embed.Web`.
+4. In the Package Manager Console window, enter the following command: 
+```
+Update-Database -StartupProjectName Embed.Web
+
+```
 5. Right click on **Embed.Web** project and "Set as Startup Project".
 5. Run the application.
 
