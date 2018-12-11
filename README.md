@@ -341,8 +341,9 @@ Response body:
 
 ## Acknowledgement
 
-http://bitoftech.net/2014/06/01/token-based-authentication-asp-net-web-api-2-owin-asp-net-identity/
-https://stackoverflow.com/questions/978061/http-get-with-request-body
-https://www.toptal.com/asp-dot-net/asp-net-web-api-tutorial
-https://www.pluralsight.com/guides/asp-net-mvc-creating-solutions-with-separate-projects-for-entities-data-access-and-website-functionality
+- http://bitoftech.net/2014/06/01/token-based-authentication-asp-net-web-api-2-owin-asp-net-identity/
+- http://www.vannevel.net/2015/03/21/how-to-unit-test-your-owin-configured-oauth2-implementation/
+- https://stackoverflow.com/questions/978061/http-get-with-request-body
+- https://www.toptal.com/asp-dot-net/asp-net-web-api-tutorial
+- https://www.pluralsight.com/guides/asp-net-mvc-creating-solutions-with-separate-projects-for-entities-data-access-and-website-functionality
 
