@@ -21,6 +21,15 @@ While working on this assignment, there are some assumptions that I have made:
 9. Timestamp is in UTC format.
 10. System to accept JSON body in snake case format.
 
+## Project Structure
+
+| Project Name  | Description |
+| ------------- | ------------- |
+| Embed.Core | Class Library. To store domain entities and logic.  |
+| Embed.Persistance  | Class Library. Set up as persistance layer for ORM implementation and repositories. |
+| Embed.Web  | Main WebApi project. This will contain the logic for the API endpoint for clients.  |
+| Embed.UnitTests  | Unit Test project for all relevant tests.  |
+
 ## Prerequisites
 
 1. Visual Studio 2017
@@ -32,13 +41,9 @@ While working on this assignment, there are some assumptions that I have made:
 2. Build the solution.
 3. Open the Package Manager Console (Tools > NuGet Package Manager > Package Manager Console).
 4. Set default project as **Embed.Persistance** in the console.
-4. In the Package Manager Console window, enter the following command: 
-```
-Update-Database -StartupProjectName Embed.Web
-
-```
-5. Right click on **Embed.Web** project and "Set as Startup Project".
-5. Run the application.
+5. In the Package Manager Console window, enter the following command: `Update-Database -StartupProjectName Embed.Web`
+6. Right click on **Embed.Web** project and "Set as Startup Project".
+7. Run the application.
 
 ## Instructions
 
