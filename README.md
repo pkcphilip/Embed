@@ -4,9 +4,9 @@ This application aims to provide RESTful API endpoints for user to get, add and 
 OAuth2 was implemented in the project so only authorized users can perform the API calls. 
 
 
-### Assumptions
+## Assumptions
 
-While working on this assignment, there are some assumptions that I have made:
+These are some assumptions that I have made based on my understanding of the question:
 1. Only GET and PUT endpoints are required.
 2. PUT will be used for create instead of POST due to above requirement.
 3. The example formats given are the expected response format for respective GET and PUT request.
@@ -339,5 +339,10 @@ Response body:
 ```
 
 
+## Acknowledgement
 
+http://bitoftech.net/2014/06/01/token-based-authentication-asp-net-web-api-2-owin-asp-net-identity/
+https://stackoverflow.com/questions/978061/http-get-with-request-body
+https://www.toptal.com/asp-dot-net/asp-net-web-api-tutorial
+https://www.pluralsight.com/guides/asp-net-mvc-creating-solutions-with-separate-projects-for-entities-data-access-and-website-functionality
 
