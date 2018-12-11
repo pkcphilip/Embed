@@ -13,9 +13,9 @@ While working on this assignment, there are some assumptions that I have made:
 4. The response from the GET request will display only product id based on the format.
 5. It is a requirement to write a GET endpoint to allow user to get all products by a list of product ids in a single request. I have enabled GET request to accept comma delimited string of ids and return the product if found in the system.
 6. It is a requirement to write a PUT endpoint to allow user to add or update product in a single request. If user pass an array of product and there are a mix of product with/without id, system will:
- - Create new product if there is no product id.
- - Update product if there is product id and product exist in the system.
- - Return Bad request if the id provided does not exists.
+   - Create new product if there is no product id.
+   - Update product if there is product id and product exist in the system.
+   - Return Bad request if the id provided does not exists.
 7. Product Id in the request body is an optional field and the rest of the data are mandatory.
 8. Id (Unique Identifier) is based on the request's correlation Id in the response format.
 9. Timestamp is in UTC format.
@@ -27,7 +27,7 @@ While working on this assignment, there are some assumptions that I have made:
 | ------------- | ------------- |
 | Embed.Core | Class Library. To store domain entities and logic.  |
 | Embed.Persistance  | Class Library. Set up as persistance layer for ORM implementation and repositories. |
-| Embed.Web  | Main WebApi project. This will contain the logic for the API endpoint for clients.  |
+| Embed.Web  | Main startup Web API project. This will contain the logic for the API endpoint to clients.  |
 | Embed.UnitTests  | Unit Test project for all relevant tests.  |
 
 ## Prerequisites
@@ -279,7 +279,7 @@ Response body:
 
 
 
-### Create and Update multiple Product
+### Create and Update multiple Products
 
 #### PUT	/api/products/all
 
