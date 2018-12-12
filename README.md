@@ -50,7 +50,7 @@ These are some assumptions that I have made based on my understanding of the que
 As authentication is required, these steps are necessary to get the authentication token.
 
 1. Register as an user in the system.
-2. Generate a authentication token.
+2. Generate an authentication token.
 3. Pass the authentication token as Authorization value in the subsequent web calls' header to the endpoints.
 
 ## Built With
