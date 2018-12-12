@@ -77,7 +77,7 @@ As authentication is required, these steps are necessary to get the authenticati
 - [Update Single Product](#update-single-product)
 - [Create and Update Multiple Products](#create-and-update-multiple-products)
 
-### Register user
+### Register User
 
 #### POST api/account/register
 
@@ -98,7 +98,7 @@ Request body:
 ```
 Return Http Status 200 (OK).
 
-### Get authentication token
+### Get Authentication Token
 
 #### GET	/token
 
@@ -130,7 +130,7 @@ Response body:
 ```
 
 
-### Get all Products
+### Get All Products
 
 #### GET	/api/products
 
@@ -167,7 +167,7 @@ Response body:
 ```
 
 
-### Get single Product by Id
+### Get Single Product By Id
 
 #### GET	/api/products/[id]
 
@@ -188,7 +188,7 @@ Response body:
 ```
 
 
-### Get multiple Products by multiple product Ids
+### Get Multiple Products By Multiple Product Ids
 
 #### GET	/api/products/[ids]
 
@@ -216,7 +216,7 @@ Response body:
 ```
 
 
-### Create single Product
+### Create Single Product
 
 #### PUT	/api/products
 
@@ -251,7 +251,7 @@ Response body:
 
 
 
-### Update single Product
+### Update Single Product
 
 #### PUT	/api/products/[id]
 
@@ -288,7 +288,7 @@ Response body:
 
 
 
-### Create and Update multiple Products
+### Create and Update Multiple Products
 
 #### PUT	/api/products/all
 
