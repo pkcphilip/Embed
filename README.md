@@ -68,6 +68,15 @@ As authentication is required, these steps are necessary to get the authenticati
 
 ## Request & Response Examples
 
+- [Register User](#register-user)
+- [Get Authentication Token](#get-authentication-token)
+- [Get All Products](#get-all-products)
+- [Get Single Product By Id](#get-single-product-by-id)
+- [Get Multiple Products By Multiple Product Ids](#get-multiple-products-by-multiple-product-ids)
+- [Create Single Product](#create-single-product)
+- [Update Single Product](#update-single-product)
+- [Create and Update Multiple Products](#create-and-update-multiple-products)
+
 ### Register user
 
 #### POST api/account/register
