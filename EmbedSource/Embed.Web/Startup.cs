@@ -23,8 +23,16 @@ using System.Web.Http;
 [assembly: OwinStartup(typeof(Embed.Web.Startup))]
 namespace Embed.Web
 {
+    /// <summary>
+    /// The OWIN startup class to specify componenents for the application pipeline.
+    /// Ref: https://docs.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/owin-startup-class-detection
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// The main method that hold all the configuration details upon application start up.
+        /// </summary>
+        /// <param name="app">The app builder instance.</param>
         public void Configuration(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
@@ -44,14 +52,6 @@ namespace Embed.Web
 
             app.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
-
-            //app.UseWebApi(config);
-
-            //app.UseNinjectMiddleware(CreateKernel);
-            //app.UseNinjectWebApi(config);
-
-            //app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
-            //app.UseWebApi(GlobalConfiguration.Configuration);
         }
 
         /// <summary>
@@ -68,6 +68,10 @@ namespace Embed.Web
             return kernel;
         }
 
+        /// <summary>
+        /// To configure all related OAuth settings.
+        /// </summary>
+        /// <param name="app">The app builder instance.</param>
         public void ConfigureOAuth(IAppBuilder app)
         {
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
