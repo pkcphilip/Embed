@@ -1,7 +1,7 @@
 # Overview
 
 This application aims to provide RESTful API endpoints for user to get, add and update product to the system via GET and PUT API calls. 
-Token based authentication (OAuth) was implemented in the project so only authorized users can perform the API calls. 
+Token based authentication (OAuth) is implemented in the project so only authenticated users can perform the API calls. 
 
 
 ## Assumptions
@@ -51,7 +51,7 @@ As authentication is required, these steps are necessary to get the authenticati
 
 1. Register as an user in the system.
 2. Generate a authentication token.
-3. Pass the authentication token as Authorization in the subsequent web calls to the endpoints.
+3. Pass the authentication token as Authorization value in the subsequent web calls' header to the endpoints.
 
 ## Built With
 
